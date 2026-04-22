@@ -1,0 +1,116 @@
+/* 
+=============================================================================
+* EDUCATIONAL WALKTHROUGH: CSS ARCHITECTURE & THE SENSORY SANCTUARY
+=============================================================================
+* 
+* WHY WE ARE DOING THIS:
+* Most modern apps use "hardcoding" for colors (e.g., color: #000). 
+* To support our "Sensory UI" (E-Ink and Twilight themes), we use 
+* CSS Variables (--variable-name). 
+* 
+* By attaching these variables to the [data-theme] attribute on the root 
+* HTML element, we can swap between the "E-Ink" paperback feel and the 
+* "Twilight" evening feel simply by changing one attribute in React.
+* 
+* We also add smooth "transitions" to the background color so that when 
+* the theme switches, it gently fades rather than flashing brightly.
+* 
+=============================================================================
+*/
+
+:root {
+  /* 
+   * THEME: E-INK / ANALOG (Default)
+   * Vibe: Warm, physical paperback. No blue light eye strain.
+   */
+  --bg-primary: #F4F0EB; /* Warm oatmeal off-white */
+  --bg-secondary: #EBE6DF; /* Slightly deeper card background */
+  --text-primary: #2D2D2D; /* Soft charcoal (pure black is too harsh) */
+  --text-muted: #6B6B6B; /* For secondary text/subtitles */
+  
+  --accent-primary: #8E9B85; /* Muted Sage Green */
+  --accent-secondary: #C88D7E; /* Soft Terracotta */
+  --border-color: #D3CDC5;
+
+  /* Typography & Spacing */
+  --font-family: 'Inter', -apple-system, sans-serif;
+  --spacing-unit: 8px;
+}
+
+[data-theme="analog"] {
+  --bg-primary: #F4F0EB;
+  --bg-secondary: #EBE6DF;
+  --text-primary: #2D2D2D;
+  --text-muted: #6B6B6B;
+  --accent-primary: #8E9B85;
+  --accent-secondary: #C88D7E;
+  --border-color: #D3CDC5;
+}
+
+[data-theme="twilight"] {
+  /* 
+   * THEME: TWILIGHT / GOLDEN HOUR
+   * Vibe: Dusk, winding down, preparing the brain for rest.
+   */
+  --bg-primary: #2A2438; /* Deep bruised purple */
+  --bg-secondary: #352F44; /* Lighter purple for cards */
+  --text-primary: #FAF9F6; /* Off-white for readability */
+  --text-muted: #A3A0AC; 
+  
+  --accent-primary: #CD8D7A; /* Warm Burnt Orange */
+  --accent-secondary: #C69B9B; /* Dusty Rose */
+  --border-color: #4C4659;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  
+  /* Very important for our "Air Lock" visual dimming transition */
+  transition: background-color 0.8s ease, color 0.8s ease; 
+  
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden; 
+}
+
+/* 
+ * Utility classes that we'll use across our React components 
+ * instead of rewriting CSS over and over.
+ */
+.container {
+  max-width: 600px; /* Keeping it narrow feels more like reading a book */
+  margin: 0 auto;
+  padding: calc(var(--spacing-unit) * 3);
+}
+
+.card {
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  padding: calc(var(--spacing-unit) * 3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Very subtle physical shadow */
+  transition: background-color 0.8s ease;
+}
+
+/* 
+ * We avoid aggressive focus outlines, choosing soft ring 
+ * colors to keep the Zen aesthetic while remaining accessible.
+ */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+button:active {
+  transform: scale(0.98); /* Satisfying tactile click feel */
+}

@@ -1,0 +1,17 @@
+{
+  "name": "AfterHours",
+  "short_name": "AfterHours",
+  "description": "A calm, local-first dream deconstructor for after-work focus.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F4F0EB",
+  "theme_color": "#2A2438",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

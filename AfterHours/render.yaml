@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: afterhours-backend
+    runtime: node
+    rootDir: AfterHours/server
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CLIENT_ORIGIN
+        value: http://localhost:5173
