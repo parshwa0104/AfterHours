@@ -1,0 +1,14 @@
+# Environment variables and secrets
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.crt
+**/secrets.json
+**/.secret
+**/.secrets
+
+# Keep example env files tracked
+!server/.env.example
